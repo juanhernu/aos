@@ -10,10 +10,14 @@ Los ejemplos completos están extraidos de la web de AWS:
 ### Crear recursos dependientes
 En este tutorial se supone que estamos construyendo la aplicación en la región ***us-east-1***, que es la disponible para AwsAcademy. Si se utiliza otra región, deberán adaptarse todos los pasos en consecuencia.
 
-***IMPORTANTE***Recordad que debemos tener instalado AWS CLI en nuestro equipo local. Si no fuese el caso, podemos hacer todo lo que viene a continuación desde Cloud9 o desde el shell integrado en la consola de AWS
+***IMPORTANTE***  Recordad que debemos tener instalado AWS CLI en nuestro equipo local. Si no fuese el caso, podemos hacer todo lo que viene a continuación desde Cloud9 o desde el shell integrado en la consola de AWS.
+Podemos verrificar que tenemos instalado AWWS CLI con
+~~~~
+aws --version
+~~~
 
 Debemos crear los siguientes recursos:
-___Dos flujos de Kinesis Data Stream____ para entrada y salida. Podemos hacerlo desde la consola de AWS o por AWS CLI con Visual Studio Code. Lo haremos de esta última forma por ser más rápido.
+___Dos flujos de Kinesis Data Stream___ para entrada y salida. Podemos hacerlo desde la consola de AWS o por AWS CLI con Visual Studio Code. Lo haremos de esta última forma por ser más rápido.
 
 ~~~ 
 aws kinesis create-stream \
