@@ -12,7 +12,7 @@ En este tutorial se supone que estamos construyendo la aplicación en la región
 
 ***IMPORTANTE***  Recordad que debemos tener instalado AWS CLI en nuestro equipo local. Si no fuese el caso, podemos hacer todo lo que viene a continuación desde Cloud9 o desde el shell integrado en la consola de AWS.
 Podemos verrificar que tenemos instalado AWWS CLI con
-~~~~
+~~~
 aws --version
 ~~~
 
