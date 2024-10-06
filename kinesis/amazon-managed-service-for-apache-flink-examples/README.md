@@ -1,6 +1,6 @@
 ## Flink Python examples
 
-Esta carpeta contiene ejemplos de Kinesis Data Streams y Kinesis Data fFirehose & data analytics (que utiliza servicio gestionado por AWWS para Apache Flink) escritos en Python. 
+Esta carpeta contiene ejemplos de Kinesis Data Streams y Kinesis Data Firehose & data analytics (que utiliza servicio gestionado por AWS para Apache Flink) escritos en Python. 
 
 Los ejemplos completos están extraidos de la web de AWS: 
 [Crear y ejecutar un servicio administrado para la aplicación Apache Flink para Python](https://docs.aws.amazon.com/managed-flink/latest/java/gs-python-createapp.html)
@@ -8,10 +8,12 @@ Los ejemplos completos están extraidos de la web de AWS:
 ---
 
 ### Crear recursos dependientes
-En este tutorial se supone que estamos construyendo la aplicación en la región us-east-1, que es la disponible para AwsAcademy. Si se utiliza otra región, deberán adaptarse todos los pasos en consecuencia.
+En este tutorial se supone que estamos construyendo la aplicación en la región ***us-east-1***, que es la disponible para AwsAcademy. Si se utiliza otra región, deberán adaptarse todos los pasos en consecuencia.
+
+***IMPORTANTE***Recordad que debemos tener instalado AWS CLI en nuestro equipo local. Si no fuese el caso, podemos hacer todo lo que viene a continuación desde Cloud9 o desde el shell integrado en la consola de AWS
 
 Debemos crear los siguientes recursos:
-* ___Dos flujos de Kinesis Data Stream____ para entrada y salida. Podemos hacerlo por consola o por AWS CLI con Visual Studio Code. Lo haremos de esta última forma por ser más rápido y sencillo
+___Dos flujos de Kinesis Data Stream____ para entrada y salida. Podemos hacerlo desde la consola de AWS o por AWS CLI con Visual Studio Code. Lo haremos de esta última forma por ser más rápido.
 
 ~~~ 
 aws kinesis create-stream \
@@ -148,14 +150,3 @@ Resumidamente, los pasos serían:
 
 Todo esto está descrito en el apartado 
 [Crear y configurar el servicio administrado para la aplicación Apache Flink](https://docs.aws.amazon.com/managed-flink/latest/java/gs-python-createapp.html#gs-python-7)
-
-* We recommend using **Python 3.11** to develop Python Flink 1.20.0 applications.
-  This is also the runtime used by Amazon Managed Service for Apache Flink.
-  Installation of the Python Flink 1.19 library on Python 3.12 may fail.
-* Installation of the Python Flink **1.15** library on machines based on **Apple Silicon** fail. 
-  We recommend upgrading to the Flink 1.20, 1.19 or 1.18. Versions 1.18+ work correctly also on Apple Silicon machines.
-  If you need to maintain a Flink 1.15 application using a machine based on Apple Silicon, you can follow [the guide to develop Flink 1.15 on Apple Silicon](LocalDevelopmentOnAppleSilicon).
-
-
-> None of these issues affects Python Flink applications running on Amazon Managed Service for Apache Flink.
-> The managed service uses Python versions compatible with the Flink runtime version you choose.
