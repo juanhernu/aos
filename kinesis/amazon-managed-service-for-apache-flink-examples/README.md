@@ -11,7 +11,7 @@ Los ejemplos completos están extraidos de la web de AWS:
 En este tutorial se supone que estamos construyendo la aplicación en la región ***us-east-1***, que es la disponible para AwsAcademy. Si se utiliza otra región, deberán adaptarse todos los pasos en consecuencia.
 
 ***IMPORTANTE***  Recordad que debemos tener instalado AWS CLI en nuestro equipo local. Si no fuese el caso, podemos hacer todo lo que viene a continuación desde Cloud9 o desde el shell integrado en la consola de AWS.
-Podemos verrificar que tenemos instalado AWWS CLI con
+Podemos verrificar que tenemos instalado AWS CLI con
 ~~~
 aws --version
 ~~~
@@ -35,18 +35,18 @@ aws kinesis create-stream \
 
 En el ejemplo completo de AWS, se crea también un ***bucket de S3***, pero no lo haremos aquí sino que es objeto de estudio en otro laboratorio.
 
-#### Configurar el entorno de desarrollo local
+### Configurar el entorno de desarrollo local
 
 Se supone que está instalado Visual Studio Code con la extensión de AWS Toolkit.
 
-##### 1. Instalar la biblioteca PyFlink
+#### 1. Instalar la biblioteca PyFlink
 Es conveniente utilizar la misma versión del entorno de ejecución de APache Flink que usa AWS. Podemos seleccionar la versión como vemos en el siguiente comando. Nosotros usaremos la 1.19.1
 
 ~~~~
 pip install apache-flink==1.19.1
 ~~~~
 
-##### 2. Comprobar que tenemos conexión con el stream de entrada
+#### 2. Comprobar que tenemos conexión con el stream de entrada
 
 Recordar que si tenemos varios perfiles de AWS, debemos ejecutar
 ~~~~
@@ -58,7 +58,7 @@ Escribimos cualquier dato en uno de los flujos de KDS
 aws kinesis put-record --stream-name ExampleOutputStream --data TEST --partition-key TEST
 ~~~~
 
-### Descargar el codigo Python
+#### 3. Descargar el codigo Python
 
 El código de la aplicación Python para este ejemplo está disponible en GitHub. 
 ~~~~
@@ -70,7 +70,7 @@ El original de AWS puede obtenerse de
 git clone https://github.com/aws-samples/amazon-managed-service-for-apache-flink-examples.git
 ~~~~
 
-#### Revisar los componentes de la aplicación 
+#### 4. Revisar los componentes de la aplicación 
 
 El envío de datos al strem de Kinesis está bajo el directorio 
 ~~~~ 
@@ -96,7 +96,7 @@ IS_LOCAL = true
 
 ---
 
-### Dependencias de descarga y empaquetado
+#### 5. Dependencias de descarga y empaquetado
 Este ejemplo tiene una serie de dependencas definidas en el archivo ___pom.xml___
 Para descargarlas, 
 
@@ -112,7 +112,7 @@ Maven crea un nuevo archivo llamado ___./target/pyflink-dependencies.jar___. Cua
 ---
 
 
-### Escribir registros en el flujo de entrada
+#### 6. Escribir registros en el flujo de entrada
 
 Basta con ejecutar el archivo 
 ~~~~
@@ -135,7 +135,7 @@ Podemos comprobar que los datos se están generando correctamente si vamos a Kin
 { "event_time" : "2024-06-12T15:08:32.04800, "ticker" : "INTC", "price" : 7 }
 ~~~~
 
-### Escribir sentencias SQL - Kinesis paraa procesar los eventos. 
+#### 7. Escribir sentencias SQL - Kinesis paraa procesar los eventos. 
 
 Para visualizar el comportamiento de los eventos, insertamos sentencias SQL que capturen los eventos deseados. Esto ya se explicó en la parte de teoría.
 
@@ -147,10 +147,23 @@ $ export IS_LOCAL=true
 $ python main.py
 ~~~~
 
-Podríamos ejecutar la aplicaciçon directamente desde el servicio administrado para Apache Flink de Kinesis. 
+Podríamos ejecutar la aplicación directamente desde el servicio administrado para Apache Flink de Kinesis. 
 Resumidamente, los pasos serían: 
 1. Cargar la aplicación a un bucket de S3
-2. ***Crear aplicación de streaming*** enel servicio ___"Aplicaciones Apache Flink"___
+2. ***Crear aplicación de streaming*** en el servicio ___"Aplicaciones Apache Flink"___
 
 Todo esto está descrito en el apartado 
 [Crear y configurar el servicio administrado para la aplicación Apache Flink](https://docs.aws.amazon.com/managed-flink/latest/java/gs-python-createapp.html#gs-python-7)
+
+#### 8. Eliminar los DataStream de Kinesis. 
+
+Podríamos hacerlo desde la consola de AWS o directamente desde AWS CLI.
+~~~ 
+aws kinesis delete-stream \
+--stream-name ExampleInputStream 
+~~~ 
+
+~~~
+aws kinesis delete-stream \
+--stream-name ExampleOutputStream 
+~~~
